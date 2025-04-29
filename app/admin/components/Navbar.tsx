@@ -1,4 +1,3 @@
-import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
@@ -16,11 +15,28 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { notification } from "@/constant";
-import { Bell, Box, ChevronDown, Search } from "lucide-react";
+import {
+  AlertCircle,
+  Bell,
+  Box,
+  ChevronDown,
+  CreditCard,
+  PackageCheck,
+  UserPlus,
+} from "lucide-react";
+import Search from "./Search";
 
 const Navbar = () => {
+
+  const iconMap: Record<string, any> = {
+    Box,
+    PackageCheck,
+    UserPlus,
+    AlertCircle,
+    CreditCard,
+  };
+
   return (
     <nav className="flex items-center justify-between px-8 py-5">
       <div className="">
@@ -30,12 +46,8 @@ const Navbar = () => {
         </p>
       </div>
       <div className="flex items-center justify-center gap-4">
-        <div className="relative flex items-center w-80">
-          <Input
-            className="rounded-full pl-10 text-2xl h-12"
-            placeholder="Search"
-          />
-          <Search strokeWidth={1.5} className="absolute left-2" />
+        <div className="">
+          <Search />
         </div>
         <div className="m-0">
           <Popover>
@@ -48,19 +60,26 @@ const Navbar = () => {
               </div>
               <div className="max-h-96 overflow-y-auto">
                 {notification.map((item, index) => {
+                  const Icon = iconMap[item.icon] || Box; // fallback to Box if icon not found
+
                   return (
-                    <div className="flex items-center justify-between gap-3 p-2">
-                      <div className="icon rounded-full p-2 bg-gray-400">
-                        <Box size={20} />
+                    <div
+                      key={index}
+                      className="flex items-center justify-between gap-3 p-2 hover:bg-gray-100 rounded-md"
+                    >
+                      <div className="icon rounded-full p-2 bg-gray-200">
+                        <Icon size={20} />
                       </div>
-                      <div className="text-start">
+
+                      <div className="flex-1 text-start">
                         <h3 className="text-sm font-semibold">{item.title}</h3>
                         <p className="text-xs text-gray-500">
                           {item.description}
                         </p>
                       </div>
-                      <div className="text-end">
-                        <p className="text-xs text-gray-500">
+
+                      <div className="text-end min-w-fit">
+                        <p className="text-xs text-gray-400">
                           {item.timestamp}
                         </p>
                       </div>
@@ -86,7 +105,7 @@ const Navbar = () => {
                 <ChevronDown size={20} strokeWidth={1.5} />
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="mt-3">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>

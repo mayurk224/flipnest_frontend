@@ -56,4 +56,29 @@ export const notification = [
         "read": true
       }
   ]
+
+  export const products = [
+    {
+      "id": "prod_001",
+      "name": "Wireless Bluetooth Headphones",
+      "image": "/products/headphones.png",
+      "price": 2999,
+      "stock": 15
+    },
+    {
+      "id": "prod_002",
+      "name": "Smart Fitness Watch",
+      "image": "/products/fitness_watch.png",
+      "price": 4999,
+      "stock": 8
+    },
+    {
+      "id": "prod_003",
+      "name": "Portable Laptop Stand",
+      "image": "/products/laptop_stand.png",
+      "price": 1499,
+      "stock": 23
+    }
+  ]
+  
   
